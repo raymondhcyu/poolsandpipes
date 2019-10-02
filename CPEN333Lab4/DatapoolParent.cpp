@@ -5,7 +5,7 @@
 using namespace std;
 
 struct myDatapoolData {
-	string name;
+	char name[99] = "Airbus A320";
 	int EIS;
 	bool fixedWing;
 };
@@ -20,7 +20,7 @@ int main() {
 	cout << "Parent datapool linked at address " << myDatapool << endl;
 
 	// Write variables
-	myDatapool->name = "Airbus A320"; // problem, gives garbage value
+	//myDatapool->name = "Airbus A320"; // problem, gives garbage value
 	myDatapool->EIS = 1980;
 	myDatapool->fixedWing = true;
 
@@ -31,7 +31,6 @@ int main() {
 		OWN_WINDOW,						// process has its own window
 		ACTIVE							// process is active immediately
 	);
-
 	CProcess p2("D:\\Documents\\CPEN333\\CPEN333Lab4\\Debug\\DataPoolChild2.exe",	// pathlist to child program executable
 		NORMAL_PRIORITY_CLASS,			// priority
 		OWN_WINDOW,						// process has its own window
