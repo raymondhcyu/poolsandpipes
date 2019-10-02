@@ -20,7 +20,7 @@ int main() {
 	cout << "Parent datapool linked at address " << myDatapool << endl;
 
 	// Write variables
-	myDatapool->name = "Airbus A320";
+	myDatapool->name = "Airbus A320"; // problem, gives garbage value
 	myDatapool->EIS = 1980;
 	myDatapool->fixedWing = true;
 
