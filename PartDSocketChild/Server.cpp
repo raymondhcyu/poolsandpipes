@@ -35,18 +35,34 @@ int main()
 	cout << "I am the server and I'm listening for incoming connections..." << endl;
 
 	char buffer[1024];
-	char returnBuffer[1024] = {'B'}; // stuff to send back to client
+	char returnBuffer[1024] = {'X'}; // stuff to send back to client
 	int clientAddrSize = sizeof(clientAddr);
 	if ((client = accept(server, (SOCKADDR*)& clientAddr, &clientAddrSize)) != INVALID_SOCKET)
 	{
 		cout << "Client connected!" << endl;
 		recv(client, buffer, sizeof(buffer), 0);
 		cout << "Client says: " << buffer << endl;
-		if (buffer[0] == 'A')
+
+		for (int i = 0; i < 3; i++)
 		{
-			cout << "A received! Doing some action..." << endl;
-			cout << "Sending back " << returnBuffer[0] << endl;
-			send(client, returnBuffer, sizeof(returnBuffer), 0);
+			if (buffer[i] == 'A')
+			{
+				cout << "A received! Doing some action..." << endl;
+				cout << "Sending back acknowledgement bit " << returnBuffer[0] << endl;
+				send(client, returnBuffer, sizeof(returnBuffer), 0);
+			}
+			else if (buffer[i] == 'B')
+			{
+				cout << "B received! Doing some action..." << endl;
+				cout << "Sending back acknowledgement bit " << returnBuffer[0] << endl;
+				send(client, returnBuffer, sizeof(returnBuffer), 0);
+			}
+			else if (buffer[i] == 'C')
+			{
+				cout << "C received! Doing some action..." << endl;
+				cout << "Sending back acknowledgement bit " << returnBuffer[0] << endl;
+				send(client, returnBuffer, sizeof(returnBuffer), 0);
+			}
 		}
 
 		memset(buffer, 0, sizeof(buffer));

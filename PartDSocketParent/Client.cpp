@@ -35,14 +35,18 @@ int main()
 	cout << "I'm the client and I connected to server!" << endl;
 
 	//char buffer[1024] = { 'B', 'o', 'n', 'j', 'o', 'u', 'r', '!' }; // message to be sent
-	char buffer[1024] = { 'A' };
-	send(server, buffer, sizeof(buffer), 0); // send message
-	cout << "Message of " << buffer[0] << " sent to server!" << endl;
-
-	// Receive feedback from server
+	char buffer[1024] = { 'A', 'B', 'C' };
 	char receiveBuffer[1024]; // received stuff
-	recv(server, receiveBuffer, sizeof(receiveBuffer), 0);
-	cout << "Received " << receiveBuffer[0] << " from server, doing stuff now..." << endl;
+
+	for (int i = 0; i < 3; i++)
+	{
+		send(server, buffer, sizeof(buffer), 0); // send message
+		cout << "Message of " << buffer[i] << " sent to server!" << endl;
+		Sleep(100);
+		// Receive feedback from server
+		recv(server, receiveBuffer, sizeof(receiveBuffer), 0);
+		cout << "Received " << receiveBuffer << " from server, doing stuff now..." << endl;
+	}
 
 	// Close and cleanup sockets
 	closesocket(server);
