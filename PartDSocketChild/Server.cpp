@@ -8,6 +8,7 @@ sauce: https://causeyourestuck.io/2016/01/17/socket-cc-windows/
 
 #include <iostream>
 #include <winsock2.h>
+#include "..\\rt.h"
 
 using namespace std;
 

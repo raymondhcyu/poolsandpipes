@@ -8,6 +8,7 @@ sauce: https://causeyourestuck.io/2016/01/17/socket-cc-windows/
 
 #include <iostream>
 #include <winsock2.h>
+#include "..\\rt.h"
 
 using namespace std;
 
@@ -18,6 +19,12 @@ using namespace std;
 
 int main()
 {
+	CProcess p1("D:\\Documents\\CPEN333\\CPEN333Lab4\\Debug\\PartDSocketChild.exe",
+		NORMAL_PRIORITY_CLASS,
+		OWN_WINDOW,
+		ACTIVE
+	);
+
 	WSADATA WSAData;
 	SOCKET server;
 	SOCKADDR_IN addr;
@@ -52,6 +59,8 @@ int main()
 	closesocket(server);
 	WSACleanup();
 	cout << "Socket closed." << endl << endl;
+
+	p1.WaitForProcess();
 
 	getchar();
 }
