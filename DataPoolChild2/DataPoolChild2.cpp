@@ -6,7 +6,7 @@ using namespace std;
 
 // Same struct as parent
 struct myDatapoolData {
-	char name[99] = "Airbus A320";
+	float pi;
 	int EIS;
 	bool fixedWing;
 };
@@ -19,7 +19,7 @@ int main(void) {
 	cout << "Child datapool 2 linked at address " << myDatapool << endl;
 
 	// Show that child access datapool which parent wrote to
-	cout << "Name: " << myDatapool->name[0] << endl;
+	cout << "Name: " << myDatapool->pi << endl;
 	cout << "Entry into service: " << myDatapool->EIS << endl;
 	cout << "Is it a fixed-wing? " << myDatapool->fixedWing << endl;
 
