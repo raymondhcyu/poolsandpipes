@@ -23,5 +23,8 @@
     <ClCompile Include="..\rt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PartBChild4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
