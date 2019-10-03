@@ -22,20 +22,23 @@ int main()
 	SOCKET server;
 	SOCKADDR_IN addr;
 
-	WSAStartup(MAKEWORD(2, 0), &WSAData);
-	server = socket(AF_INET, SOCK_STREAM, 0);
+	WSAStartup(MAKEWORD(2, 0), &WSAData); // tells computer using sockets, using winsock2
+	server = socket(AF_INET, SOCK_STREAM, 0); // initialize socket
+	// AF_INET = IPv4, SOCK_STREAM = TCP
 
-	addr.sin_addr.s_addr = inet_addr("127.0.0.1"); // replace the ip with your futur server ip address. If server AND client are running on the same computer, you can use the local ip 127.0.0.1
+	// Socket addressing
+	addr.sin_addr.s_addr = inet_addr("127.0.0.1"); // replace ip with futur server ip address. If server AND client running on same computer, use localhost ip 127.0.0.1
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(5555);
 
-	connect(server, (SOCKADDR*)& addr, sizeof(addr));
+	connect(server, (SOCKADDR*)& addr, sizeof(addr)); // connect to server
 	cout << "Connected to server!" << endl;
 
-	char buffer[1024] = { 'h', 'e', 'l', 'l', 'o', '.' };
-	send(server, buffer, sizeof(buffer), 0);
+	char buffer[1024] = { 'B', 'o', 'n', 'j', 'o', 'u', 'r', '!' }; // message to be sent
+	send(server, buffer, sizeof(buffer), 0); // send message
 	cout << "Message sent!" << endl;
 
+	// Close and cleanup sockets
 	closesocket(server);
 	WSACleanup();
 	cout << "Socket closed." << endl << endl;

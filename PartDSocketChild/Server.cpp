@@ -19,17 +19,17 @@ using namespace std;
 int main()
 {
 	WSADATA WSAData;
-	SOCKET server, client;
+	SOCKET server, client; // two sockets; server handle connections, to connect from client
 	SOCKADDR_IN serverAddr, clientAddr;
 
 	WSAStartup(MAKEWORD(2, 0), &WSAData);
 	server = socket(AF_INET, SOCK_STREAM, 0);
 
-	serverAddr.sin_addr.s_addr = INADDR_ANY;
+	serverAddr.sin_addr.s_addr = INADDR_ANY; // no IP address b/c it's server
 	serverAddr.sin_family = AF_INET;
 	serverAddr.sin_port = htons(5555);
 
-	bind(server, (SOCKADDR*)& serverAddr, sizeof(serverAddr));
+	bind(server, (SOCKADDR*)& serverAddr, sizeof(serverAddr)); // like connect, but for server
 	listen(server, 0);
 
 	cout << "Listening for incoming connections..." << endl;
@@ -41,6 +41,7 @@ int main()
 		cout << "Client connected!" << endl;
 		recv(client, buffer, sizeof(buffer), 0);
 		cout << "Client says: " << buffer << endl;
+		
 		memset(buffer, 0, sizeof(buffer));
 
 		closesocket(client);
