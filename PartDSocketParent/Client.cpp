@@ -32,11 +32,17 @@ int main()
 	addr.sin_port = htons(5555);
 
 	connect(server, (SOCKADDR*)& addr, sizeof(addr)); // connect to server
-	cout << "Connected to server!" << endl;
+	cout << "I'm the client and I connected to server!" << endl;
 
-	char buffer[1024] = { 'B', 'o', 'n', 'j', 'o', 'u', 'r', '!' }; // message to be sent
+	//char buffer[1024] = { 'B', 'o', 'n', 'j', 'o', 'u', 'r', '!' }; // message to be sent
+	char buffer[1024] = { 'A' };
 	send(server, buffer, sizeof(buffer), 0); // send message
-	cout << "Message sent!" << endl;
+	cout << "Message of " << buffer[0] << " sent to server!" << endl;
+
+	// Receive feedback from server
+	char receiveBuffer[1024]; // received stuff
+	recv(server, receiveBuffer, sizeof(receiveBuffer), 0);
+	cout << "Received " << receiveBuffer[0] << " from server, doing stuff now..." << endl;
 
 	// Close and cleanup sockets
 	closesocket(server);

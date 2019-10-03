@@ -32,18 +32,24 @@ int main()
 	bind(server, (SOCKADDR*)& serverAddr, sizeof(serverAddr)); // like connect, but for server
 	listen(server, 0);
 
-	cout << "Listening for incoming connections..." << endl;
+	cout << "I am the server and I'm listening for incoming connections..." << endl;
 
 	char buffer[1024];
+	char returnBuffer[1024] = {'B'}; // stuff to send back to client
 	int clientAddrSize = sizeof(clientAddr);
 	if ((client = accept(server, (SOCKADDR*)& clientAddr, &clientAddrSize)) != INVALID_SOCKET)
 	{
 		cout << "Client connected!" << endl;
 		recv(client, buffer, sizeof(buffer), 0);
 		cout << "Client says: " << buffer << endl;
-		
-		memset(buffer, 0, sizeof(buffer));
+		if (buffer[0] == 'A')
+		{
+			cout << "A received! Doing some action..." << endl;
+			cout << "Sending back " << returnBuffer[0] << endl;
+			send(client, returnBuffer, sizeof(returnBuffer), 0);
+		}
 
+		memset(buffer, 0, sizeof(buffer));
 		closesocket(client);
 		cout << "Client disconnected." << endl;
 	}
